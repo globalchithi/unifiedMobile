@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="confirm">Confirm</string>
+    <string name="ok">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="back_to_home">Back to Home</string>
+    <string name="log_out">Log Out</string>
+    <string name="invoice_disclaimer">
+        This is NOT an invoice. This is a lot level count that will update your hub and ensure you
+        don’t run out of inventory. Only if missing doses aren’t reconciled will you be charged.
+    </string>
+    <string name="payment_disclaimer">
+        This is NOT a payment guarantee. This is a lot level count that will update your hub and
+        ensure you don’t run out of inventory. All payments must be reviewed by VaxCare before they
+        are added to your monthly statement.
+    </string>
+    <string name="retry">Retry</string>
+    <string name="try_again">Try Again</string>
+    <string name="cancel">Cancel</string>
+    <string name="product">Product</string>
+    <string name="quantity">Quantity</string>
+    <string name="subtotal">Sub-Total</string>
+    <string name="nonseasonal">Non-Seasonal</string>
+    <string name="seasonal">Seasonal</string>
+    <string name="save">Save</string>
+    <string name="adjust">Adjust</string>
+    <string name="log_waste">Log Waste</string>
+    <string name="count">Count</string>
+    <string name="vaccines">Vaccines</string>
+
+    <string name="scanner_problem_title">Problem with scanner.</string>
+    <string name="scanner_problem_action">Refresh scanner</string>
+    <string name="scanner_problem_try_again">Try again later</string>
+</resources>

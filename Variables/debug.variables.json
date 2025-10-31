@@ -1,0 +1,15 @@
+{
+    "DeploySettings": {
+      "ASSEMBLE_ENVIRONMENT": "Debug",
+      "KEY_VAULT": "github-mobile-dev",
+      "STORAGE_ACCOUNT": "vxccorpfs",
+      "SECURE_FILES_FILE_SHARE": "vaxhubplatformkeys",
+      "APK_FILE_SHARE": "vaxhubapks",
+      "VERSION_OFFSET": 108,
+      "JDK_VERSION": 17,
+      "APK_NAME": "UnifiedHub",
+      "VARIABLES_FILE_PATH": "Variables/dev.variables.json",
+      "SECRETS_FILE_PATH": "Variables/secrets.dev.variables.json",
+      "DEPLOY_VARS_FILE_PATH": "Variables/deploy.dev.variables.json"
+    }
+}

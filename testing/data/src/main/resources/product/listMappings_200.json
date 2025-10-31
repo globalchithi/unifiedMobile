@@ -1,0 +1,42 @@
+[
+  {
+    "coreProductId": 1,
+    "epProductName": "Recombivax HB Adult SDV",
+    "epPackageId": 1,
+    "epProductId": 1,
+    "prettyName": "Recombivax HB (Adult)",
+    "dosesInSeries": 1
+  },
+  {
+    "coreProductId": 43,
+    "epProductName": "Recombivax HB Adult SDV",
+    "epPackageId": 43,
+    "epProductId": 1,
+    "prettyName": "Recombivax HB (Adult)",
+    "dosesInSeries": 1
+  },
+  {
+    "coreProductId": 2,
+    "epProductName": "Recombivax HB Pediatric SDV",
+    "epPackageId": 2,
+    "epProductId": 2,
+    "prettyName": "Recombivax HB (Pediatric/Adolescent)",
+    "dosesInSeries": 1
+  },
+  {
+    "coreProductId": 3,
+    "epProductName": "ActHIB SDV",
+    "epPackageId": 403,
+    "epProductId": 3,
+    "prettyName": "ActHIB",
+    "dosesInSeries": 1
+  },
+  {
+    "coreProductId": 159,
+    "epProductName": "ActHIB SDV",
+    "epPackageId": 427,
+    "epProductId": 3,
+    "prettyName": "ActHIB",
+    "dosesInSeries": 1
+  }
+]

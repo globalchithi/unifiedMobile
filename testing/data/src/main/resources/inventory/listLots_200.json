@@ -1,0 +1,54 @@
+{
+  "inventory": [
+    {
+      "lotNumber": "0908AA",
+      "onHand": 126,
+      "usedDoses": 0,
+      "inventorySource": 3,
+      "productId": 1,
+      "antigen": "Hep B",
+      "inventoryGroup": "Hep B (Adult)",
+      "prettyName": "Recombivax HB (Adult)",
+      "avgUsed": 0,
+      "productStatus": 1
+    },
+    {
+      "lotNumber": "J001527",
+      "onHand": 100,
+      "usedDoses": 12,
+      "inventorySource": 1,
+      "productId": 1,
+      "antigen": "Hep B",
+      "inventoryGroup": "Hep B (Adult)",
+      "prettyName": "Recombivax HB (Adult)",
+      "avgUsed": 0,
+      "productStatus": 1
+    },
+    {
+      "lotNumber": "R030926",
+      "onHand": 8,
+      "usedDoses": 11,
+      "inventorySource": 1,
+      "productId": 1,
+      "antigen": "Hep B",
+      "inventoryGroup": "Hep B (Adult)",
+      "prettyName": "Recombivax HB (Adult)",
+      "avgUsed": 0,
+      "productStatus": 1
+    },
+    {
+      "lotNumber": "J012567",
+      "onHand": 1,
+      "usedDoses": 3,
+      "inventorySource": 1,
+      "productId": 2,
+      "antigen": "Hep B",
+      "inventoryGroup": "Hep B (Ped/Adolescent)",
+      "prettyName": "Recombivax HB (Pediatric/Adolescent)",
+      "avgUsed": 0,
+      "productStatus": 1
+    }
+  ],
+  "lastSync": "2025-07-08T16:51:47.1367971Z",
+  "nextSync": "2025-07-08T17:21:47.1367974Z"
+}

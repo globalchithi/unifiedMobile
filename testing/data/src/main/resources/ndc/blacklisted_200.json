@@ -1,0 +1,18 @@
+[
+  {
+    "ndc": "00005-0100-05",
+    "errorMessage": "<![CDATA[You have scanned the <b>box</b>, please scan the antigen syringe (Grey Cap and Green Border Labels).]]>"
+  },
+  {
+    "ndc": "00005-1971-02",
+    "errorMessage": "<![CDATA[You have scanned the <b>box</b>, please scan the antigen syringe.]]>"
+  },
+  {
+    "ndc": "00005-2000-02",
+    "errorMessage": "<![CDATA[You have scanned the <b>box</b>, please scan the antigen syringe.]]>"
+  },
+  {
+    "ndc": "00006-4045-41",
+    "errorMessage": "<![CDATA[You have scanned the <b>box</b>, please scan the antigen vial.]]>"
+  }
+]

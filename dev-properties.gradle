@@ -1,0 +1,25 @@
+// This gradle property file contains human readable values for gradle properties.
+// Go builds will not use these values, instead see the properties.gradle file.
+ext {
+    vhapiUrlNaboo = "https://vhapinaboo.vaxcare.com/"
+    vhapiUrlDev = "https://vhapidev.vaxcare.com/"
+    vhapiUrlQa = "https://vhapiqa.vaxcare.com/"
+    vhapiUrlStg = "https://vhapistg.vaxcare.com/"
+    vhapiUrlProd = "https://vhapi.vaxcare.com/"
+    offlineScannerCustomerId = "VAX112520190001"
+    offlineScannerKey = "DgLgowN/KRUX45gP5NJDH7V/JD37b0KcIyGNhCNwwMuyFKZsSjw4PQb0" +
+            "/+uIElgJzUwaZia1bKW4Aj8yunj8B7xRB4bj73TzsKPj7M5irPAw8F1Iv67AU5nXxIFQF9" +
+            "6DhkdDgA5dSwB9l9tiiwaIjw8qRrX+L2QQfwY4cVm96YfqtiG1Q7fhwsYjeEu/LNEVBY1C2" +
+            "KaRUYdHCzSJ9zFclgBBbpFwFIBsFh773aHU19C9UqWY2cIVAhXhduUtWlUXkpBl4osZuzC2J" +
+            "h6kTTjGLjBbwTqHbvB+FSobGRkphzTpPzT4i4cGf4Y2Y5QsQADZUxrCA93BYB2Mj2U2LIktC2D" +
+            "XHmpTQ+qxvZy2J9/AmmUFIZBIdfKUdNqvQAyAhBKUqSjAwFY1dbulXk6uRSvjmA=="
+    dataDogClientToken = "pub4a0e4d9fc1cfa2e9f3b4a917896231f4"
+    dataDogApplicationId = "3e1e50e3-855b-4a5d-ac06-9016897dea8e"
+    dataDogRumSampleRate = "100"
+    dataDogSessionReplaySampleRate = "0"
+    dataDogSite = "US3"
+
+    storePassword = "vaxcare"
+    platformAlias = "platform"
+    platformPassword = "platform"
+}

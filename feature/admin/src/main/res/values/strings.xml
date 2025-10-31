@@ -1,0 +1,33 @@
+<resources>
+    <!-- Admin Login -->
+    <string name="admin_login_title">VaxCare Admin Login</string>
+    <string name="admin_login_enter_password_fmt">Enter Password for %1$s</string>
+    <string name="admin_login_button">Log In</string>
+    <string name="admin_login_error_password">Incorrect Password</string>
+    <string name="admin_login_error_device_offline">You must be online to log in</string>
+
+    <!-- Admin Details -->
+    <string name="admin_details_title">VaxCare Admin Details</string>
+    <string name="clinic_name_prefix">Connected to: </string>
+    <string name="partner_id">Partner ID</string>
+    <string name="enter_partner_id">Enter Partner ID</string>
+    <string name="partner_id_description">The Partner ID drives what inventory information is shown on this hub.</string>
+    <string name="clinic_id">Clinic ID</string>
+    <string name="enter_clinic_id">Enter Clinic ID</string>
+    <string name="clinic_id_description">The Clinic ID identifies the specific clinic that is assigned to this Hub.</string>
+    <string name="error_invalid_id_pairing">ID Mismatch. Enter correct Partner ID and Clinic ID.</string>
+    <string name="go_to_hub_info">Go to Hub Information</string>
+
+    <!-- Admin Info -->
+    <string name="admin_info_title">Hub Info</string>
+    <string name="admin_info_apk">APK Version</string>
+    <string name="admin_info_apk_value">Version %1$s</string>
+    <string name="admin_info_serial_number">Serial Number</string>
+    <string name="admin_info_serial_number_description">The Serial Number allows VaxCare to track the location of this Hub.</string>
+    <string name="admin_info_system_connectivity">System Connectivity</string>
+    <string name="admin_info_database_records">Database Records</string>
+    <string name="admin_info_database_description">Last synced %1$s at %2$s</string>
+    <string name="admin_info_open_source_library_attribution">Open Source Library Attribution</string>
+    <string name="admin_info_validate_scanner_license">Validate Scanner License</string>
+    <string name="admin_info_scanner_license_not_valid">Scanner license not valid</string>
+</resources>

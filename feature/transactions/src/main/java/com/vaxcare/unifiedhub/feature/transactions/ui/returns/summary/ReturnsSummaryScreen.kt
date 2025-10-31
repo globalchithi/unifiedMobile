@@ -1,0 +1,483 @@
+package com.vaxcare.unifiedhub.feature.transactions.ui.returns.summary
+
+import android.content.res.Configuration
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.requiredSize
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.vaxcare.unifiedhub.core.designsystem.theme.VaxCareTheme.color
+import com.vaxcare.unifiedhub.core.designsystem.theme.VaxCareTheme.measurement
+import com.vaxcare.unifiedhub.core.designsystem.theme.VaxCareTheme.type
+import com.vaxcare.unifiedhub.core.ui.Icons
+import com.vaxcare.unifiedhub.core.ui.TestTags
+import com.vaxcare.unifiedhub.core.ui.arch.BaseMviScreen
+import com.vaxcare.unifiedhub.core.ui.component.BaseTitleBar
+import com.vaxcare.unifiedhub.core.ui.component.ButtonConfig
+import com.vaxcare.unifiedhub.core.ui.component.LogoSpinner
+import com.vaxcare.unifiedhub.core.ui.component.VCBasicDialog
+import com.vaxcare.unifiedhub.core.ui.component.VCScaffold
+import com.vaxcare.unifiedhub.core.ui.component.button.VCFloatingActionButton
+import com.vaxcare.unifiedhub.core.ui.component.productSheet.cell.product.ProductCell
+import com.vaxcare.unifiedhub.core.ui.compose.LocalStock
+import com.vaxcare.unifiedhub.core.ui.compose.ProvideStock
+import com.vaxcare.unifiedhub.core.ui.compose.preview.FullDevicePreview
+import com.vaxcare.unifiedhub.core.ui.compose.preview.PreviewContainer
+import com.vaxcare.unifiedhub.core.ui.ext.verticalFadingEdge
+import com.vaxcare.unifiedhub.core.ui.model.StockUi
+import com.vaxcare.unifiedhub.feature.transactions.R
+import com.vaxcare.unifiedhub.feature.transactions.ui.returns.model.ProductUi
+import com.vaxcare.unifiedhub.feature.transactions.ui.returns.reason.ReturnReasonUi
+import com.vaxcare.unifiedhub.feature.transactions.ui.returns.summary.ReturnsSummaryDialog.SubmissionFailed
+import com.vaxcare.unifiedhub.feature.transactions.ui.returns.summary.ReturnsSummaryEvent.NavigateBack
+import com.vaxcare.unifiedhub.feature.transactions.ui.returns.summary.ReturnsSummaryEvent.NavigateToReturnCompleted
+import com.vaxcare.unifiedhub.feature.transactions.ui.returns.summary.ReturnsSummaryIntent.DismissDialog
+import com.vaxcare.unifiedhub.feature.transactions.ui.returns.summary.ReturnsSummaryIntent.GoBack
+import com.vaxcare.unifiedhub.feature.transactions.ui.returns.summary.ReturnsSummaryIntent.RetrySubmission
+import com.vaxcare.unifiedhub.feature.transactions.ui.returns.summary.ReturnsSummaryIntent.SubmitReturn
+import com.vaxcare.unifiedhub.core.designsystem.R as DesignSystemR
+
+private const val PRODUCT_QUANT_WIDTH_PORTRAIT = 544
+private const val PRODUCT_QUANT_WIDTH_LANDSCAPE = 704
+
+@Composable
+fun ReturnsSummaryScreen(
+    onNavigateBack: () -> Unit,
+    onNavigateForward: () -> Unit,
+    viewModel: ReturnsSummaryViewModel = hiltViewModel(),
+) {
+    BaseMviScreen(
+        viewModel = viewModel,
+        onEvent = { event ->
+            when (event) {
+                NavigateBack -> onNavigateBack()
+                NavigateToReturnCompleted -> onNavigateForward()
+            }
+        }
+    ) { state, handleIntent ->
+        when (state.activeDialog) {
+            SubmissionFailed -> {
+                SubmissionFailedDialog(
+                    onDismiss = { handleIntent(DismissDialog) },
+                    onRetry = { handleIntent(RetrySubmission) }
+                )
+            }
+        }
+
+        AnimatedContent(
+            targetState = state.isLoading,
+            transitionSpec = {
+                fadeIn() togetherWith fadeOut()
+            }
+        ) { isLoading ->
+            if (isLoading) {
+                Loading()
+            } else {
+                ProvideStock(state.stock) {
+                    ReturnsSummaryContent(
+                        state = state,
+                        orientation = LocalConfiguration.current.orientation,
+                        onBackClick = { handleIntent(GoBack) },
+                        onNextClick = { handleIntent(SubmitReturn) },
+                    )
+                }
+            }
+        }
+
+        Box(Modifier.fillMaxSize()) {
+        }
+    }
+}
+
+@Composable
+private fun ReturnsSummaryContent(
+    state: ReturnsSummaryState,
+    orientation: Int,
+    onBackClick: () -> Unit,
+    onNextClick: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    val products = state.products
+
+    VCScaffold(
+        topBar = {
+            BaseTitleBar(
+                modifier = modifier,
+                title = R.string.returns_summary_title,
+                buttonIcon = DesignSystemR.drawable.ic_chevron_left,
+                onButtonClick = onBackClick
+            )
+        },
+        fab = {
+            VCFloatingActionButton(
+                onClick = onNextClick,
+                iconPainter = painterResource(DesignSystemR.drawable.ic_arrow_forward),
+            )
+        },
+    ) {
+        when (orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                ReturnsSummaryLandscape(
+                    reason = state.reason,
+                    total = state.total,
+                    products = products,
+                )
+            }
+
+            Configuration.ORIENTATION_PORTRAIT -> {
+                ReturnsSummaryPortrait(
+                    reason = state.reason,
+                    total = state.total,
+                    products = products,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun ReturnsSummaryLandscape(
+    reason: ReturnReasonUi?,
+    total: Int,
+    products: List<ProductUi>,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(horizontal = measurement.spacing.large)
+            .padding(
+                top = measurement.spacing.topBarSmallY,
+                bottom = 18.dp
+            )
+    ) {
+        ProductSheet(
+            isLandscape = true,
+            products = products,
+            modifier = Modifier.weight(1f)
+        )
+        ReasonAndTotalFooter(
+            isLandscape = true,
+            reason = reason,
+            total = total,
+            modifier = Modifier.padding(top = measurement.spacing.xSmall)
+        )
+    }
+}
+
+@Composable
+private fun ReturnsSummaryPortrait(
+    reason: ReturnReasonUi?,
+    total: Int,
+    products: List<ProductUi>,
+    modifier: Modifier = Modifier,
+) {
+    Column(
+        modifier = Modifier
+            .padding(horizontal = measurement.spacing.small)
+            .padding(
+                bottom = 38.dp,
+                top = measurement.spacing.topBarSmallY
+            )
+    ) {
+        ProductSheet(
+            isLandscape = false,
+            products = products,
+            modifier = modifier.weight(1f)
+        )
+        ReasonAndTotalFooter(
+            isLandscape = false,
+            reason = reason,
+            total = total,
+            modifier = Modifier.padding(top = measurement.spacing.xSmall)
+        )
+    }
+}
+
+@Composable
+private fun ReasonAndTotalFooter(
+    isLandscape: Boolean,
+    reason: ReturnReasonUi?,
+    total: Int,
+    modifier: Modifier = Modifier,
+) {
+    Surface(
+        shape = RoundedCornerShape(size = measurement.radius.cardMedium),
+        color = color.container.primaryContainer,
+        modifier = modifier
+            .testTag(TestTags.Returns.Summary.FOOTER_CONTAINER)
+    ) {
+        Box(Modifier.fillMaxWidth()) {
+            val width = if (isLandscape) {
+                PRODUCT_QUANT_WIDTH_LANDSCAPE
+            } else {
+                PRODUCT_QUANT_WIDTH_PORTRAIT
+            }
+
+            Row(
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .requiredSize(width = width.dp, height = 104.dp)
+                    .padding(
+                        start = measurement.spacing.large,
+                        top = measurement.spacing.small,
+                        bottom = measurement.spacing.small
+                    )
+            ) {
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(measurement.spacing.xSmall),
+                    modifier = Modifier.padding(end = measurement.spacing.medium)
+                ) {
+                    Text(
+                        text = stringResource(R.string.reason).uppercase(),
+                        style = type.bodyTypeStyle.label.copy(fontWeight = FontWeight.SemiBold),
+                        color = color.onContainer.onContainerPrimary
+                    )
+                    Text(
+                        text = reason?.getFullText(LocalStock.current) ?: "",
+                        style = type.bodyTypeStyle.body3,
+                        color = color.onContainer.onContainerPrimary,
+                    )
+                }
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(measurement.spacing.xSmall),
+                    horizontalAlignment = Alignment.End,
+                ) {
+                    Text(
+                        text = stringResource(R.string.add_public_home_total).uppercase(),
+                        style = type.bodyTypeStyle.label,
+                        color = color.onContainer.onContainerPrimary
+                    )
+                    Text(
+                        text = total.toString(),
+                        style = type.headerTypeStyle.headlineMediumBold,
+                        color = color.onContainer.onContainerPrimary
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ProductSheet(
+    isLandscape: Boolean,
+    products: List<ProductUi>,
+    modifier: Modifier = Modifier,
+) {
+    Surface(
+        shape = RoundedCornerShape(
+            size = measurement.radius.cardMedium,
+        ),
+        color = color.container.primaryContainer,
+        modifier = modifier.fillMaxWidth()
+    ) {
+        Column {
+            if (products.isNotEmpty()) {
+                ProductSheetHeader(isLandscape = isLandscape)
+
+                val lazyListState = rememberLazyListState()
+                LazyColumn(
+                    state = lazyListState,
+                    contentPadding = PaddingValues(bottom = 88.dp),
+                    modifier = Modifier
+                        .testTag(TestTags.Returns.Summary.PRODUCT_SHEET_CONTAINER)
+                        .verticalFadingEdge(lazyListState = lazyListState, 32.dp)
+                ) {
+                    itemsIndexed(
+                        items = products,
+                        key = { _, item -> item.id }
+                    ) { i, item ->
+                        ProductSheetItem(
+                            isLandscape = isLandscape,
+                            product = item,
+                        )
+                        HorizontalDivider(
+                            color = color.outline.twoHundred,
+                            thickness = 2.dp
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun ProductSheetHeader(isLandscape: Boolean, modifier: Modifier = Modifier) {
+    val headerWidth = if (isLandscape) {
+        PRODUCT_QUANT_WIDTH_LANDSCAPE
+    } else {
+        PRODUCT_QUANT_WIDTH_PORTRAIT
+    }
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = modifier
+            .padding(top = 8.dp)
+            .height(40.dp)
+            .width(headerWidth.dp)
+            .padding(start = 48.dp)
+    ) {
+        Text(
+            text = stringResource(DesignSystemR.string.product).uppercase(),
+            style = type.bodyTypeStyle.body6Bold,
+        )
+        Text(
+            text = stringResource(DesignSystemR.string.quantity).uppercase(),
+            style = type.bodyTypeStyle.body6Bold
+        )
+    }
+    HorizontalDivider(
+        color = color.outline.twoHundred,
+        thickness = 2.dp
+    )
+}
+
+@Composable
+private fun ProductSheetItem(
+    isLandscape: Boolean,
+    product: ProductUi,
+    modifier: Modifier = Modifier,
+) {
+    with(product) {
+        val width = if (isLandscape) {
+            PRODUCT_QUANT_WIDTH_LANDSCAPE
+        } else {
+            PRODUCT_QUANT_WIDTH_PORTRAIT
+        }
+
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.SpaceBetween,
+            modifier = modifier
+                .testTag(TestTags.Returns.Summary.productSheetRow(product.antigen))
+                .size(width = width.dp, height = 80.dp)
+                .padding(start = measurement.spacing.small)
+        ) {
+            with(product) {
+                ProductCell(
+                    titleRow = {
+                        ProductTitleLine(
+                            leadingIcon = Icons.presentationIcon(presentation),
+                            title = productInfoText(antigen, prettyName)
+                        )
+                    },
+                    bottomContent = {
+                        ProductCellText(text = getLotInfo())
+                    }
+                )
+
+                Text(
+                    text = quantity.toString(),
+                    style = type.bodyTypeStyle.body3Bold,
+                )
+            }
+        }
+    }
+}
+
+@Composable
+private fun Loading(modifier: Modifier = Modifier) {
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier
+            .fillMaxSize()
+            .background(color.container.primaryContainer)
+            .pointerInput(Unit) { } // Consume all input
+    ) {
+        LogoSpinner(modifier = Modifier.size(80.dp))
+    }
+}
+
+@Composable
+private fun SubmissionFailedDialog(
+    onDismiss: () -> Unit,
+    onRetry: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    VCBasicDialog(
+        modifier = modifier,
+        onDismissRequest = onDismiss,
+        title = stringResource(R.string.dialog_title),
+        text = stringResource(R.string.dialog_internet_required_adjustment_description),
+        primaryButtonConfig = ButtonConfig(
+            text = stringResource(DesignSystemR.string.retry),
+            onClick = onRetry
+        ),
+        secondaryButtonConfig = ButtonConfig(
+            text = stringResource(DesignSystemR.string.cancel),
+            onClick = onDismiss
+        )
+    )
+}
+
+@FullDevicePreview
+@Composable
+fun ForStockPrivate() {
+    PreviewContainer {
+        ProvideStock(StockUi.PRIVATE) {
+            ReturnsSummaryContent(
+                state = ReturnsSummaryState(
+                    stock = StockUi.PRIVATE,
+                    reason = ReturnReasonUi.EXPIRED,
+                    products = ProductUi.Sample,
+                    total = ProductUi.Sample.sumOf { it.quantity },
+                ),
+                orientation = LocalConfiguration.current.orientation,
+                {},
+                {}
+            )
+        }
+    }
+}
+
+@FullDevicePreview
+@Composable
+fun ForStockVFC() {
+    PreviewContainer {
+        ProvideStock(StockUi.VFC) {
+            ReturnsSummaryContent(
+                state = ReturnsSummaryState(
+                    stock = StockUi.VFC,
+                    reason = ReturnReasonUi.EXCESS_INVENTORY,
+                    products = ProductUi.Sample,
+                    total = ProductUi.Sample.sumOf { it.quantity },
+                ),
+                orientation = LocalConfiguration.current.orientation,
+                {},
+                {}
+            )
+        }
+    }
+}

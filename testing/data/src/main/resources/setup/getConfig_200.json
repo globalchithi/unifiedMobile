@@ -1,0 +1,17 @@
+{
+  "codeCorpLicense": {
+    "type": "offline",
+    "customerId": "VAX112520190001",
+    "key": "DgLgowN/KRUX45gP5NJDH7V/JD37b0KcIyGNhCNwwMuyFKZsSjw4PQb0/+uIElgJzUwaZia1bKW4Aj8yunj8B7xRB4bj73TzsKPj7M5irPAw8F1Iv67AU5nXxIFQF96DhkdDgA5dSwB9l9tiiwaIjw8qRrX+L2QQfwY4cVm96YfqtiG1Q7fhwsYjeEu/LNEVBY1C2KaRUYdHCzSJ9zFclgBBbpFwFIBsFh773aHU19C9UqWY2cIVAhXhduUtWlUXkpBl4osZuzC2Jh6kTTjGLjBbwTqHbvB+FSobGRkphzTpPzT4i4cGf4Y2Y5QsQADZUxrCA93BYB2Mj2U2LIktC2DXHmpTQ+qxvZy2J9/AmmUFIZBIdfKUdNqvQAyAhBKUqSjAwFY1dbulXk6uRSvjmA==",
+    "expiration": "2025-08-28T00:00:00"
+  },
+  "dataDogLicense": {
+    "clientToken": "pub4a0e4d9fc1cfa2e9f3b4a917896231f4",
+    "applicationId": "3e1e50e3-855b-4a5d-ac06-9016897dea8e",
+    "sampleRate": 100,
+    "sessionReplaySampleRate": 0,
+    "site": "US3",
+    "enabled": true
+  },
+  "severity": "NoAction"
+}

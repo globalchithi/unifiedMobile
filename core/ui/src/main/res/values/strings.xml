@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="base_title_bar_preview_title">VaxCare</string>
+    <string name="no_internet_dialog_title">No Internet Connection</string>
+    <string name="no_internet_dialog_description">An internet connection is required. Try again or check to make sure you have a network connection.</string>
+    <string name="network_settings">Network Settings</string>
+</resources>

@@ -1,0 +1,95 @@
+# Pipeline for PR build validation
+
+name: $(Date:yyyyMMdd)$(Rev:r)
+
+parameters:
+  - name: runAdvancedSecurity
+    displayName: 'Run Advanced Security?'
+    type: boolean
+    default: false
+trigger: none
+
+# run the nightly midnight against master
+schedules:
+- cron: '0 0 * * *'
+  displayName: 'Daily midnight build'
+  branches:
+    include:
+    - master
+  always: false
+  batch: false
+
+pool:
+  vmImage: 'windows-2022'
+
+variables:
+  wrapperScript: 'gradlew'
+  VaxHubPlatformGradleFilePath: '$(AGENT.TEMPDIRECTORY)\properties.gradle'
+  VaxHubPlatformKeystoreFilePath: '$(AGENT.TEMPDIRECTORY)\keystore.jks'
+
+steps:
+- task: AdvancedSecurity-Codeql-Init@1
+  inputs:
+    languages: 'java'
+  condition: or(eq(${{parameters.runAdvancedSecurity}}, true), eq(variables['Build.CronSchedule.DisplayName'], 'Daily midnight build'))
+
+- task: DownloadSecureFile@1
+  displayName: 'Download Keystore File'
+  inputs:
+    secureFile: keystore.jks
+    retryCount: 5
+
+- task: DownloadSecureFile@1
+  displayName: 'Download Properties.gradle file'
+  inputs:
+    secureFile: properties.gradle
+    retryCount: 5
+
+- task: MavenAuthenticate@0
+  displayName: 'Maven Authenticate'
+  inputs:
+    artifactsFeeds: vaxmaven
+
+- task: Gradle@2
+  displayName: 'gradlew ktlintCheck'
+  inputs:
+    tasks: 'ktlintCheck'
+    jdkVersionOption: 1.17
+    gradleOptions: '-Xmx2048m'
+
+- task: Gradle@2
+  displayName: 'gradlew assembleDebug'
+  inputs:
+    gradleWrapperFile: '$(wrapperScript)'
+    options: '-PbuildNumber=$(Rev:r) -PVaxHubPlatformGradleFilePath=$(VaxHubPlatformGradleFilePath) -PVaxHubPlatformKeystoreFilePath=$(VaxHubPlatformKeystoreFilePath) -Pcoverage'
+    tasks: 'assembleDebug --daemon --stacktrace'
+    publishJUnitResults: false
+    jdkVersionOption: 1.17
+    gradleOptions: '-Xmx2048m'
+
+- task: Gradle@2
+  displayName: 'gradlew testDebugUnitTest'
+  inputs:
+    options: '-PVaxHubPlatformGradleFilePath=$(VaxHubPlatformGradleFilePath) -PVaxHubPlatformKeystoreFilePath=$(VaxHubPlatformKeystoreFilePath) -Pcoverage=true'
+    tasks: 'testDebugUnitTest --daemon --stacktrace'
+    jdkVersionOption: 1.17
+
+- task: Gradle@2
+  displayName: 'gradlew createDebugCombinedCoverageReport'
+  inputs:
+    tasks: 'createDebugCombinedCoverageReport --daemon --stacktrace'
+    jdkVersionOption: 1.17
+    gradleOptions: '-Xmx2048m'
+
+- task: PublishCodeCoverageResults@2
+  inputs:
+    summaryFileLocation: '**/reports/jacoco/createDebugCombinedCoverageReport/*.xml'
+    failIfCoverageEmpty: true
+
+- task: AdvancedSecurity-Dependency-Scanning@1
+  condition: or(eq(${{parameters.runAdvancedSecurity}}, true), eq(variables['Build.CronSchedule.DisplayName'], 'Daily midnight build'))
+
+## Disabling CodeQL Code Analysis
+## Consistently getting an OOM exception and all attempts to increase space is not working
+#- task: AdvancedSecurity-Codeql-Analyze@1
+#  condition: or(eq(${{parameters.runAdvancedSecurity}}, true), eq(variables['Build.CronSchedule.DisplayName'], 'Daily midnight build'))

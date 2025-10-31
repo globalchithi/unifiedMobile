@@ -1,0 +1,21 @@
+// This gradle property file contains Go variable names as values for gradle properties.
+// Go will replace these variable names for actual values at build time.
+// This is initiated by passing the go parameter to the gradle command: -Pgo=true
+ext {
+    vhapiUrlNaboo = "__UHVaxVHAPIUrl__"
+    vhapiUrlDev = "__UHVaxVHAPIUrl__"
+    vhapiUrlQa = "__UHVaxVHAPIUrl__"
+    vhapiUrlStg = "__UHVaxVHAPIUrl__"
+    vhapiUrlProd = "__UHVaxVHAPIUrl__"
+    offlineScannerCustomerId = "__OfflineCodeCorpCustomerId__"
+    offlineScannerKey = "__OfflineCodeCorpLicense__="
+    dataDogClientToken = "__DataDogUHClientToken__"
+    dataDogApplicationId = "__DataDogUHApplicationId__"
+    dataDogRumSampleRate = "__DataDogUHRumSampleRate__"
+    dataDogSessionReplaySampleRate = "__DataDogUHSessionReplaySampleRate__"
+    dataDogSite = "__DataDogUHSite__"
+
+    storePassword = "__UHStorePassword__"
+    platformAlias = "__UHPlatformAlias__"
+    platformPassword = "__UHPlatformPassword__"
+}

@@ -1,0 +1,197 @@
+name: Build-Deploy-VaxCare.UnifiedHub
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: write
+  packages: read
+
+jobs:
+  build:
+    if: ${{! (contains(github.ref_name, 'release') || contains(github.ref_name, 'hotfix'))}}
+    runs-on:
+      group: linux
+    environment: debug
+    steps: 
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Getting Deploy Variables from JSON file
+        uses: VaxCareDev/Actions/.github/actions/Miscellaneous/GetDeployVariables@main
+        with:
+          deployEnv: debug
+          varPath: ./Variables/debug.variables.json
+          deployVarsPath: ./Variables/deploy.debug.variables.json
+  
+      - name: Load and Set Deploy Env Variables from JSON
+        uses: VaxCareDev/Actions/.github/actions/GitHub/SetGHVarsFromJson@main
+        with:
+          deployEnv: debug
+          pathToJson: ./Variables/deploy.debug.variables.json
+          repository: ${{github.REPOSITORY}}
+          token: ${{ secrets.SET_VARIABLES_PAT }}
+
+      - name: Set Build Version
+        uses: VaxCareDev/Actions/.github/actions/Miscellaneous/SetMobileVariables@main
+        with:
+          versionOffset: ${{env.VERSION_OFFSET}}          
+
+      - name: Azure login
+        uses: VaxCareDev/Actions/.github/actions/Azure/Login/@main
+        with: 
+          clientId: ${{ secrets.AZURE_CLIENT_ID }} 
+          tenantId: ${{ secrets.AZURE_TENANT_ID }}
+          subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          
+      - name: Set up JDK 
+        uses: VaxCareDev/Actions/.github/actions/Java/SetUp@main
+        with:
+          jdkVersion: ${{env.JDK_VERSION}}
+
+      - name: Get Keystore File
+        uses: VaxCareDev/Actions/.github/actions/Azure/Storage/FileShareDownload@main
+        with:
+          accountName: ${{env.STORAGE_ACCOUNT}}
+          shareName: ${{env.SECURE_FILES_FILE_SHARE}}
+          dest: ${{github.workspace}}
+          path: keystore.jks
+  
+      - name: Get Gradle Properties File
+        uses: VaxCareDev/Actions/.github/actions/Azure/Storage/FileShareDownload@main
+        with:
+          accountName: ${{env.STORAGE_ACCOUNT}}
+          shareName: ${{env.SECURE_FILES_FILE_SHARE}}
+          dest: ${{github.workspace}}
+          path: properties.gradle
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: Gradle Assemble
+        uses: VaxCareDev/Actions/.github/actions/Gradle/Assemble@main
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.PACKAGES_PAT }}
+          AZURE_DEVOPS_PASSWORD: ${{ secrets.AZURE_DEVOPS_PASSWORD }}
+        with:
+          gradleWrapperPath: ./gradlew
+          buildEnv: Debug 
+          options: --daemon --stacktrace -PbuildNumber=${{github.run_number}} -PVaxHubPlatformGradleFilePath=${{github.workspace}}/properties.gradle -PVaxHubPlatformKeystoreFilePath=${{github.workspace}}/keystore.jks -Pcoverage=true
+
+      - name: Gradle Lint
+        uses: VaxCareDev/Actions/.github/actions/Gradle/Lint@main
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{secrets.PACKAGES_PAT}}
+        with:
+          gradleWrapperPath: ./gradlew
+
+      - name: Gradle Test
+        uses: VaxCareDev/Actions/.github/actions/Gradle/Test@main
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.PACKAGES_PAT }}
+          AZURE_DEVOPS_PASSWORD: ${{ secrets.AZURE_DEVOPS_PASSWORD }}
+        with:
+          gradleWrapperPath: ./gradlew
+          testCommand: testDebugUnitTest 
+          options: --daemon --stacktrace -PVaxHubPlatformGradleFilePath=${{github.workspace}}/properties.gradle -PVaxHubPlatformKeystoreFilePath=${{github.workspace}}/keystore.jks -Pcoverage=true
+
+      - name: Gradle Test Report
+        uses: VaxCareDev/Actions/.github/actions/Gradle/TestReport@main
+        env:
+          GITHUB_ACTOR: ${{ github.actor }}
+          GITHUB_TOKEN: ${{ secrets.PACKAGES_PAT }}
+          AZURE_DEVOPS_PASSWORD: ${{ secrets.AZURE_DEVOPS_PASSWORD }}
+        with:
+          gradleWrapperPath: ./gradlew
+          reportCommand: createDebugCombinedCoverageReport 
+          options: --daemon --stacktrace 
+
+      - name: Upload Artifact
+        uses: VaxCareDev/Actions/.github/actions/GitHub/PublishArtifact@main
+        with:
+          artifactName: ${{env.APK_NAME}}
+          artifactPath: app/build/outputs/apk/debug/*.apk
+    
+  deploy_dev:
+    if: ${{github.event_name != 'pull_request'}}
+    needs: build
+
+    uses: VaxCareDev/Actions/.github/workflows/deployApkTo.yaml@main
+    with:
+      ENVIRONMENT: dev
+      VARIABLES_FILE_PATH: "Variables/dev.variables.json"
+      DEPLOY_VARS_FILE_PATH: "Variables/deploy.dev.variables.json"
+      REPOSITORY: ${{github.repository}}
+    secrets:
+      AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      SET_VARIABLES_PAT: ${{ secrets.SET_VARIABLES_PAT }}
+
+  deploy_qa:
+    needs: deploy_dev
+    uses: VaxCareDev/Actions/.github/workflows/deployApkTo.yaml@main
+    with:
+      ENVIRONMENT: qa
+      VARIABLES_FILE_PATH: "Variables/qa.variables.json"
+      DEPLOY_VARS_FILE_PATH: "Variables/deploy.qa.variables.json"
+      REPOSITORY: ${{github.repository}}
+    secrets:
+      AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      SET_VARIABLES_PAT: ${{ secrets.SET_VARIABLES_PAT }}
+
+  deploy_qa_release:
+    if: ${{github.event_name != 'pull_request' && (contains(github.ref_name, 'release') || contains(github.ref_name, 'hotfix'))}} 
+    uses: VaxCareDev/Actions/.github/workflows/deployApkTo.yaml@main
+    with:
+      ENVIRONMENT: qa
+      VARIABLES_FILE_PATH: "Variables/qa.variables.json"
+      DEPLOY_VARS_FILE_PATH: "Variables/deploy.qa.variables.json"
+      REPOSITORY: ${{github.repository}}
+    secrets:
+      AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      SET_VARIABLES_PAT: ${{ secrets.SET_VARIABLES_PAT }}
+
+  deploy_staging:
+    needs: deploy_qa_release
+
+    uses: VaxCareDev/Actions/.github/workflows/deployApkTo.yaml@main
+    with:
+      ENVIRONMENT: stg
+      VARIABLES_FILE_PATH: "Variables/staging.variables.json"
+      DEPLOY_VARS_FILE_PATH: "Variables/staging.dev.variables.json"
+      REPOSITORY: ${{github.repository}}
+    secrets:
+      AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      SET_VARIABLES_PAT: ${{ secrets.SET_VARIABLES_PAT }}     
+
+  deploy_prod:
+    needs: deploy_staging
+
+    uses: VaxCareDev/Actions/.github/workflows/deployApkTo.yaml@main
+    with:
+      ENVIRONMENT: production
+      VARIABLES_FILE_PATH: "Variables/production.variables.json"
+      DEPLOY_VARS_FILE_PATH: "Variables/production.dev.variables.json"
+      REPOSITORY: ${{github.repository}}
+    secrets:
+      AZURE_CLIENT_ID: ${{secrets.AZURE_CLIENT_ID}}
+      AZURE_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+      AZURE_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      SET_VARIABLES_PAT: ${{ secrets.SET_VARIABLES_PAT }}

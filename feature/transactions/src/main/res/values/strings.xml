@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- =================================================================== -->
+    <!-- Titles & General Strings                                            -->
+    <!-- =================================================================== -->
+    <string name="count_product">Count Product</string>
+    <string name="add_public">Add Public</string>
+    <string name="log_waste">Log Waste</string>
+    <string name="return_products">Return Products</string>
+    <string name="lot_number">LOT#</string>
+    <string name="expiration">EXPIRATION</string>
+    <string name="expired">EXPIRED</string>
+    <string name="undo">Undo</string>
+    <string name="total">TOTAL</string>
+    <string name="enter_quantity">Enter Quantity</string>
+    <string name="reason">REASON</string>
+    <string name="scan_each_product">Scan each product</string>
+    <string name="transaction_complete_title">All Done!</string>
+    <string name="destination">DESTINATION</string>
+    <string name="total_products">Total Products</string>
+    <plurals name="lot_number_detail_text">
+        <item quantity="one">LOT # %1$s</item>
+        <item quantity="other">LOT # %1$s &amp; %2$s more</item>
+    </plurals>
+
+
+    <!-- =================================================================== -->
+    <!-- Feature: ConfirmStock                                                     -->
+    <!-- =================================================================== -->
+    <string name="confirm_stock_vaccine_stock">Vaccines %s</string>
+
+
+    <!-- =================================================================== -->
+    <!-- Feature: Counts                                                     -->
+    <!-- =================================================================== -->
+
+    <!-- Screen: Counts - Confirm Stock -->
+    <string name="counts_confirm_stock_subtitle">Product and stock for which you are counting inventory:</string>
+
+    <!-- Screen: Counts - Home -->
+    <string name="update_count">Update Count</string>
+    <string name="product_description_carton_size">%s per carton</string>
+
+    <string name="product_description_lots_overflow">&amp; %s more</string>
+
+    <!-- Screen: Counts - Submit -->
+    <string name="screen_submit_count">Submit Count</string>
+    <string name="header_subtext_confirmed_products">Only confirmed products shown.</string>
+    <string name="adjustment">Adjustment</string>
+    <string name="impact">Impact</string>
+    <string name="bottom_panel_header">Verify product count. This is NOT an invoice.</string>
+    <string name="bottom_panel_description">This is a lot-level count that will update your hub and ensure that you don\'t run out of vaccines. You will only be charged if missing doses aren\'t reconciled.</string>
+    <string name="loading_screen_message">Please wait while we submit your inventory count.</string>
+
+    <!-- Screen: Counts - Confirmation -->
+    <string name="confirm_description">Your %s inventory count was logged successfully.</string>
+    <string name="confirm_total_units">Total Units</string>
+    <string name="confirm_added_units">Added Units</string>
+    <string name="confirm_missing_units">Missing Units</string>
+    <string name="confirm_verify_count">Verify Count</string>
+    <string name="confirm_inventory_balance">Inventory Balance</string>
+
+    <!-- =================================================================== -->
+    <!-- Feature: Log Waste                                                  -->
+    <!-- =================================================================== -->
+
+    <!-- Screen: Log Waste - Confirm Stock -->
+    <string name="log_waste_confirm_stock_subtitle">Product and stock you are logging waste:</string>
+
+    <!-- Screen: Log Waste - Reason -->
+    <string name="log_waste_reason_other">Other</string>
+    <string name="log_waste_reason_title">Reason for logging waste:</string>
+    <string name="log_waste_reason_expired">Expired</string>
+    <string name="log_waste_reason_delivered_out_of_temp">Delivered Out of Temp</string>
+    <string name="log_waste_reason_broken_or_contaminated">Broken / Contaminated</string>
+    <string name="log_waste_reason_spoiled_or_out_of_range">Spoiled / Out of range</string>
+    <string name="log_waste_reason_prepped_and_not_administered">Prepped and Not Administered</string>
+
+    <!-- Screen: Log Waste - Main -->
+    <string name="log_waste_footer_reason">%1$s \nfrom %2$s Inventory</string>
+
+    <!-- Dialog: Log Waste - Return Expired Products -->
+    <string name="log_waste_return_expired_products">Return Expired Products</string>
+    <string name="log_waste_return_expired_products_body">These products should be shipped back to VaxCare. Process a return now or continue logging waste for other products.</string>
+
+    <!-- Dialog: Log Waste - Return Products Delivered Out of Temp -->
+    <string name="log_waste_return_products_delivered_out_of_temp">Return Products Delivered Out of Temp</string>
+    <string name="log_waste_return_products_delivered_out_of_temp_body">These products should be shipped back to VaxCare. Process a return now or continue logging waste for other products.</string>
+
+    <!-- Dialog: Log Waste - Common -->
+    <string name="log_waste_return_products">Return Products</string>
+
+    <!-- Screen: Log Waste - Complete -->
+    <string name="log_waste_complete_total_impact">Total Impact</string>
+    <string name="log_waste_complete_description">Your products have been logged as waste.</string>
+
+    <!-- =================================================================== -->
+    <!-- Feature: Add Public                                                 -->
+    <!-- =================================================================== -->
+
+    <!-- Screen: Add Public - Confirm Stock -->
+    <string name="add_public_confirm_stock_subtitle">Product and stock you are adding:</string>
+    <!-- Screen: Add Public - Lot Interaction -->
+    <string name="add_public_lot_interaction_title">Add Each Product Lot</string>
+
+    <!-- Screen: Add Public - Home -->
+    <string name="add_public_home_title">Add Products</string>
+    <string name="add_public_home_destination">Destination</string>
+    <string name="add_public_home_stock_inventory">%1$s Inventory</string>
+    <string name="add_public_home_total">Total</string>
+
+    <!-- Screen: Add Public - Summary -->
+    <string name="add_public_summary_title">Add Products Summary</string>
+    <string name="add_public_summary_disclaimer">By continuing, you are verifying that the above products have been added to your Public %1$s Inventory.</string>
+
+    <!-- Screen: Add Public - Complete -->
+    <string name="add_public_complete_description">Your products have been added to %s Inventory.</string>
+
+    <!-- =================================================================== -->
+    <!-- Feature: Returns                                                    -->
+    <!-- =================================================================== -->
+
+    <!-- Common: Returns -->
+    <string name="returns_top_bar_title">Return Products</string>
+    <string name="returns_stock_aware_reason">%1$s\nfrom %2$s Inventory</string>
+
+    <!-- Screen: Returns - Confirm Stock -->
+    <string name="returns_confirm_stock_subtitle">Product and stock you are returning:</string>
+
+    <!-- Screen: Returns - Reason -->
+    <string name="return_reason_title">Why are you returning the products?</string>
+    <string name="return_reason_expired">Expired</string>
+    <string name="return_reason_excess">Excess Inventory</string>
+    <string name="return_reason_fridge_out_of_temp">Fridge Out of Temp Range</string>
+    <string name="return_reason_delivered_out_of_temp">Delivered Out of Temp Range</string>
+    <string name="return_reason_recalled">Recalled by Manufacturer</string>
+    <string name="return_reason_damaged">Damaged in Transit</string>
+
+    <!-- Screen: Returns - Product Interaction -->
+    <string name="rt_product_expiring_products">These products are expiring within 7 days.</string>
+    <string name="rt_product_reason_expired">Expired doses</string>
+    <string name="rt_product_reason_excess">Excess inventory</string>
+    <string name="rt_product_reason_fridge_out_of_temp">Fridge out of temp range</string>
+    <string name="rt_product_reason_delivered_out_of_temp">Delivered out of temp range</string>
+    <string name="rt_product_reason_damaged">Damaged in transit</string>
+    <string name="rt_product_reason_recalled">Recalled by manufacturer</string>
+
+    <!-- Screen: Returns - Window -->
+    <string name="returns_window_when_do_you_want_your_return_to_be_picked_up">When do you want your return to be picked up?</string>
+    <string name="returns_window_how_many_shipping_labels">How many shipping labels? (1 per shipping box)</string>
+    <string name="returns_window_finding_shipping_dates">Finding shipping dates…</string>
+
+    <!-- Screen: Returns - Summary -->
+    <string name="returns_summary_title">Returns Summary</string>
+
+    <!-- Screen: Returns - Complete -->
+    <string name="returns_complete_shipment_pickup">Shipment Pickup</string>
+    <string name="returns_complete_almost_done">Almost Done!</string>
+    <string name="returns_complete_nice_work">Nice Work!</string>
+    <string name="returns_complete_check_your_email">Check your email for additional return instructions.</string>
+    <string name="returns_complete_check_your_email_tracking">Check your email for your tracking number and additional return instructions.</string>
+    <string name="returns_complete_inventory_will_be_updated">Your inventory will be updated to remove these doses.</string>
+    <string name="returns_complete_follow_state_guidelines_expired_doses">Please follow your state’s guidelines to return expired doses.</string>
+    <string name="returns_complete_follow_state_guidelines_products">Please follow your state’s guidelines to return products.</string>
+    <string name="returns_complete_vxc_will_reach_out">VaxCare will reach out to ship these products.</string>
+    <string name="returns_complete_product_removed_private">The product listed will be removed from your Private inventory. Your clinic will not be charged for these doses.</string>
+    <string name="returns_complete_products_removed_private_expired">These products will be removed from your Private inventory. Your clinic will not be charged for these doses.</string>
+
+
+    <!-- =================================================================== -->
+    <!-- Component: Lot Search                                               -->
+    <!-- =================================================================== -->
+    <string name="lot_search_title">Search Lot</string>
+    <string name="lot_search_not_existing_lot">Not an existing lot number?</string>
+    <string name="lot_search_add_new_lot_label">Add New Lot</string>
+    <string name="lot_search_add_new_lot_disclaimer">Make sure you have entered the lot number correctly before adding a new one.</string>
+    <string name="lot_search_confirm_add_lot_number_title_fmt">Lot Number: %1s</string>
+    <string name="lot_search_confirm_add_lot_number_body_fmt">Confirm %1s lot number%2s</string>
+    <string name="lot_search_confirm_add_lot_number_body_vaccine">vaccine</string>
+    <string name="lot_search_confirm_add_lot_number_body2">Do not enter the diluent, adjuvant, or carton lot number.</string>
+    <string name="lot_search_confirm_add_lot_number_cancel">Cancel</string>
+    <string name="lot_search_confirm_add_lot_number_confirm">Confirm</string>
+
+
+    <!-- =================================================================== -->
+    <!-- Component: Add New Lot                                              -->
+    <!-- =================================================================== -->
+    <string name="add_new_lot_top_bar_title">Add new Lot %1s</string>
+    <string name="add_new_lot_select_antigen">Select Antigen</string>
+    <string name="add_new_lot_select_product">Select Product</string>
+    <string name="add_new_lot_select_presentation">Select Presentation</string>
+    <string name="add_new_lot_expiration">Expiration</string>
+    <string name="add_new_lot_set_date">Set date</string>
+    <string name="add_new_lot_invalid_expiration_date">Invalid expiration selected</string>
+    <!-- Presentation Options -->
+    <string name="add_new_lot_single_dose_vial">Single-dose vial</string>
+    <string name="add_new_lot_single_dose_tube">Single-dose tube</string>
+    <string name="add_new_lot_multi_dose_vial">Multi-dose vial</string>
+    <string name="add_new_lot_prefilled_syringe">Prefilled syringe</string>
+    <string name="add_new_lot_nasal_spray">Nasal spray</string>
+    <string name="add_new_lot_nasal_syringe">Nasal syringe</string>
+    <string name="add_new_lot_iud">IUD</string>
+    <string name="add_new_lot_implant">Implant</string>
+    <string name="add_new_lot_unknown">Unknown</string>
+
+
+    <!-- =================================================================== -->
+    <!-- Component: Product-Lot                                              -->
+    <!-- =================================================================== -->
+    <string name="product_lot_lot_number">LOT # %s</string>
+
+    <!-- =================================================================== -->
+    <!-- Component: Lot Interaction                                          -->
+    <!-- =================================================================== -->
+    <!-- Header -->
+    <string name="lot_interaction_title">Edit Lot Count</string>
+    <string name="lot_interaction_scan_each_product_lot">Scan each product lot</string>
+
+    <string name="lot_interaction_bad_scan">Incorrect product. Please search by lot number.</string>
+    <!-- Lot List Items -->
+    <string name="lot_interaction_update_count">Update Count</string>
+
+    <string name="lot_interaction_expiring_fmt">%1$s - Initiate return once count is complete</string>
+    <!-- Footer -->
+    <string name="lot_interaction_per_carton_fmt">%1$s per carton</string>
+
+    <!-- =================================================================== -->
+    <!-- Component: Scanner Section                                          -->
+    <!-- =================================================================== -->
+    <string name="scanner_section_unknown_product">Unknown product. Search by Lot number.</string>
+
+    <!-- =================================================================== -->
+    <!-- Component: Scanner Section                                          -->
+    <!-- =================================================================== -->
+    <string name="log_waste_summary_top_bar_title">Log Waste Summary</string>
+    <string name="log_waste_summary_header_product">PRODUCT</string>
+    <string name="log_waste_summary_header_quantity">QUANTITY</string>
+    <string name="log_waste_summary_header_value">VALUE</string>
+    <string name="log_waste_summary_footer_confirmation">CONFIRMATION</string>
+    <string name="log_waste_summary_footer_confirmation_description_private">By continuing, you agree to the financial impact from the wasted doses. The amount will be deducted from your monthly statement.</string>
+    <string name="log_waste_summary_footer_confirmation_description_public_fmt">By continuing, you agree to act in compliance to your state policies for logging wasted products from %1$s Inventory.</string>
+
+    <!-- =================================================================== -->
+    <!-- Dialogs (Used in multiple screens)                                  -->
+    <!-- =================================================================== -->
+    <!-- Action Required Dialog -->
+    <string name="action_required">Action Required</string>
+    <string name="action_required_description">Products highlighted in yellow need your attention.\nPlease confirm the lot-level counts before submitting count.</string>
+
+    <!-- Discard Changes Dialog -->
+    <string name="discard_changes">Discard Changes?</string>
+    <string name="discard_changes_description">Changes made will be discarded. Would you like to exit?</string>
+    <string name="discard_changes_title">Discard Changes?</string>
+    <string name="discard_changes_body">Changes made will be discarded. Would you like to exit?</string>
+
+    <!-- Connection Lost Dialog -->
+    <string name="dialog_title">Connection Lost</string>
+    <string name="dialog_description">Your inventory count could not be submitted because the connection was lost.</string>
+    <string name="dialog_internet_required_adjustment_description">An internet connection is required to complete an inventory adjustment.</string>
+
+    <!-- No Internet Connection Dialog -->
+    <string name="dialog_no_internet_title">No Internet Connection</string>
+    <string name="dialog_no_internet_description">An internet connection is required. Try again or check to make sure you have a network connection.</string>
+
+    <!-- Product Scan Result Dialogs -->
+    <string name="expired_product_title">Expired Product</string>
+    <string name="expired_product_body">Expired products cannot be added.</string>
+    <string name="mismatched_product_title">Mismatched Product</string>
+    <string name="mismatched_product_body">Product does not match the selected product.</string>
+    <string name="invalid_scan_title">Invalid Scan</string>
+
+</resources>

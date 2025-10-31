@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="select_inventory">Select Inventory</string>
+    <string name="notification_expired_title">Return expired doses</string>
+    <string name="notification_expired_description">You have %1$d expired doses</string>
+    <string name="notification_overdue_count_title">Count your inventory</string>
+    <string name="notification_overdue_count_description">It\'s been %1$d days since your last inventory count</string>
+    <string name="notification_app_update_title">Update your software</string>
+    <string name="notification_app_update_description">Download the latest version at the Play Store</string>
+    <string name="notifications_empty_message">We\'ve got it from here.</string>
+    <string name="seasonal_flu">Seasonal &amp; Flu</string>
+    <string name="non_seasonal">Non-Seasonal</string>
+    <string name="count_inventory">Count Inventory</string>
+    <string name="transfer">Transfer</string>
+    <string name="log_waste">Log Waste</string>
+    <string name="returns">Returns</string>
+    <string name="tutorial_videos">Tutorial Videos</string>
+    <string name="admin_access">Admin Access</string>
+    <string name="hub_info">Hub Info</string>
+    <string name="help">Help</string>
+    <string name="admin">Admin</string>
+    <string name="manage">Manage %1$s %2$s</string>
+    <string name="on_hand">On Hand %1$s %2$s</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="collapse_menu">Collapse Menu</string>
+    <string name="buyback">Buyback</string>
+    <string name="add_public">Add Doses</string>
+    <string name="expired_doses">Expired Doses</string>
+    <string name="on_hand_header">On Hand</string>
+    <string name="on_hand_empty">There are no products in your inventory</string>
+    <string name="add_doses">Add %1$s Doses</string>
+</resources>

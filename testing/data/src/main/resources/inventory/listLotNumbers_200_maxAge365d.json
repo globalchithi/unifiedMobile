@@ -1,0 +1,52 @@
+[
+  {
+    "id": 1295102,
+    "salesLotNumberId": 1295102,
+    "salesProductId": 1,
+    "epProductId": 1,
+    "expirationDate": "2025-03-31T00:00:00",
+    "qualifiedLotNumber": "B2201V1",
+    "source": null,
+    "unreviewed": false
+  },
+  {
+    "id": 2232,
+    "salesLotNumberId": 2232,
+    "salesProductId": 1,
+    "epProductId": 1,
+    "expirationDate": null,
+    "qualifiedLotNumber": "J001585",
+    "source": null,
+    "unreviewed": false
+  },
+  {
+    "id": 3761,
+    "salesLotNumberId": 3761,
+    "salesProductId": 1,
+    "epProductId": 1,
+    "expirationDate": null,
+    "qualifiedLotNumber": "J010334",
+    "source": null,
+    "unreviewed": false
+  },
+  {
+    "id": 27188,
+    "salesLotNumberId": 27188,
+    "salesProductId": 1,
+    "epProductId": 1,
+    "expirationDate": null,
+    "qualifiedLotNumber": "K006530",
+    "source": null,
+    "unreviewed": false
+  },
+  {
+    "id": 3746,
+    "salesLotNumberId": 3746,
+    "salesProductId": 1,
+    "epProductId": 1,
+    "expirationDate": null,
+    "qualifiedLotNumber": "K011957",
+    "source": null,
+    "unreviewed": false
+  }
+]

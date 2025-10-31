@@ -1,0 +1,70 @@
+[
+  {
+    "ClinicId": 10808,
+    "CreatedOn": "2025-01-22 01:17:56.943",
+    "Guid": "d6a6c022-d6b4-423f-811e-b6904c5982d0",
+    "PartitionId": 14025,
+    "ReceiptKey": "00000000-0000-0000-0000-000000000000",
+    "UserId": 13611,
+    "Stock": 1,
+    "VaccineCountEntries": [
+      {
+        "AdjustmentReason": "",
+        "AdjustmentReasonType": "",
+        "AdjustmentType": 11,
+        "CountGuid": "00000000-0000-0000-0000-000000000000",
+        "DoseValue": 22.99,
+        "EntryId": "cfc15fa1-557b-4f4f-a52a-2ee67e35f034",
+        "LotExpirationDate": "2023-02-26 05:00:00.000",
+        "LotNumber": "C5816AA",
+        "NewOnHand": 10,
+        "PrevOnHand": 10,
+        "CoreProductId": 6,
+        "ProductId": 6,
+        "EpProductId": 6,
+        "Stock": 0,
+        "UserId": 0,
+        "UserName": "",
+        "IsDirty": 0
+      },
+      {
+        "AdjustmentReason": "",
+        "AdjustmentReasonType": "",
+        "AdjustmentType": 11,
+        "CountGuid": "00000000-0000-0000-0000-000000000000",
+        "DoseValue": 22.99,
+        "EntryId": "f31ff7a3-14c2-4f23-8c27-1b6bd34d973d",
+        "LotExpirationDate": "2022-06-06 04:00:00.000",
+        "LotNumber": "DTAP",
+        "NewOnHand": 5,
+        "PrevOnHand": 3,
+        "CoreProductId": 6,
+        "ProductId": 6,
+        "EpProductId": 6,
+        "Stock": 0,
+        "UserId": 0,
+        "UserName": "",
+        "IsDirty": 0
+      },
+      {
+        "AdjustmentReason": "",
+        "AdjustmentReasonType": "",
+        "AdjustmentType": 11,
+        "CountGuid": "00000000-0000-0000-0000-000000000000",
+        "DoseValue": 22.86,
+        "EntryId": "e3b49b19-b70d-46e3-bec0-2817dc088d17",
+        "LotExpirationDate": "2022-05-28 04:00:00.000",
+        "LotNumber": "49TM3",
+        "NewOnHand": 5,
+        "PrevOnHand": 5,
+        "CoreProductId": 41,
+        "ProductId": 41,
+        "EpProductId": 92,
+        "Stock": 0,
+        "UserId": 0,
+        "UserName": "",
+        "IsDirty": 0
+      }
+    ]
+  }
+]

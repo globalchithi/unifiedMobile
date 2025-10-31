@@ -1,0 +1,271 @@
+{
+  "clinicId": 10808,
+  "partnerId": 100001,
+  "partnerName": "2nd Baptist Church",
+  "clinicNumber": "1310808",
+  "clinicName": "Church",
+  "address": "1080 Woodcock Road",
+  "city": "Orlando",
+  "state": "FL",
+  "zipCode": "32803",
+  "primaryPhone": "888-829-8555",
+  "integrationType": "Bi",
+  "contactId": 0,
+  "scheduler": true,
+  "vfc": true,
+  "terminationInProcess": false,
+  "estimatedShots": 5,
+  "partnerActiveContract": true,
+  "isVaxBuyEnabled": false,
+  "isManageInventoryEnabled": true,
+  "isLotLevelCountRequired": false,
+  "sun": false,
+  "mon": true,
+  "tue": true,
+  "wed": true,
+  "thu": false,
+  "fri": false,
+  "sat": false,
+  "activeFeatureFlags": [
+    {
+      "featureFlagId": 1,
+      "featureFlagName": "VaxHubAdjustments"
+    },
+    {
+      "featureFlagId": 2,
+      "featureFlagName": "VaccineInsights"
+    },
+    {
+      "featureFlagId": 3,
+      "featureFlagName": "PublicStockPilot"
+    },
+    {
+      "featureFlagId": 4,
+      "featureFlagName": "ShowReturnTransactions"
+    },
+    {
+      "featureFlagId": 11,
+      "featureFlagName": "FluBaselines"
+    },
+    {
+      "featureFlagId": 19,
+      "featureFlagName": "VaccineInsightsEhr"
+    },
+    {
+      "featureFlagId": 20,
+      "featureFlagName": "Vax2.0Beta"
+    },
+    {
+      "featureFlagId": 24,
+      "featureFlagName": "Vax2.0InventoryBeta"
+    },
+    {
+      "featureFlagId": 25,
+      "featureFlagName": "850AlternateDistributor"
+    },
+    {
+      "featureFlagId": 26,
+      "featureFlagName": "DisableAvrClinic"
+    },
+    {
+      "featureFlagId": 31,
+      "featureFlagName": "ConsentForms2.0"
+    },
+    {
+      "featureFlagId": 32,
+      "featureFlagName": "UnlinkedSiuVxu"
+    },
+    {
+      "featureFlagId": 33,
+      "featureFlagName": "PrototypeDoorSensor"
+    },
+    {
+      "featureFlagId": 34,
+      "featureFlagName": "PrototypeDoorSensorAlert"
+    },
+    {
+      "featureFlagId": 35,
+      "featureFlagName": "PrototypeDoorSensorPopUp"
+    },
+    {
+      "featureFlagId": 36,
+      "featureFlagName": "PrototypeDoorSensorCamera"
+    },
+    {
+      "featureFlagId": 37,
+      "featureFlagName": "PayorLogicRealTimeDataReplacement"
+    },
+    {
+      "featureFlagId": 39,
+      "featureFlagName": "EventDrivenVxu"
+    },
+    {
+      "featureFlagId": 40,
+      "featureFlagName": "OktaSingleSignOn"
+    },
+    {
+      "featureFlagId": 41,
+      "featureFlagName": "OrmEventDrivenVxu"
+    },
+    {
+      "featureFlagId": 43,
+      "featureFlagName": "OktaEnabled"
+    },
+    {
+      "featureFlagId": 44,
+      "featureFlagName": "NewBranding2020"
+    },
+    {
+      "featureFlagId": 47,
+      "featureFlagName": "EnableMbiForMedicarePartD"
+    },
+    {
+      "featureFlagId": 48,
+      "featureFlagName": "CommunityEvents"
+    },
+    {
+      "featureFlagId": 52,
+      "featureFlagName": "UseInAppUpdates"
+    },
+    {
+      "featureFlagId": 57,
+      "featureFlagName": "OneTouch"
+    },
+    {
+      "featureFlagId": 58,
+      "featureFlagName": "BuybackHeroFlow"
+    },
+    {
+      "featureFlagId": 60,
+      "featureFlagName": "EnableCheckoutHistoryHub"
+    },
+    {
+      "featureFlagId": 67,
+      "featureFlagName": "VfcBilling"
+    },
+    {
+      "featureFlagId": 68,
+      "featureFlagName": "OneTouchReenableScheduler"
+    },
+    {
+      "featureFlagId": 73,
+      "featureFlagName": "MvpHubOrders"
+    },
+    {
+      "featureFlagId": 77,
+      "featureFlagName": "PracticeFusionIntegration"
+    },
+    {
+      "featureFlagId": 78,
+      "featureFlagName": "OneTouchPhoneNumberCollection"
+    },
+    {
+      "featureFlagId": 83,
+      "featureFlagName": "StockDecisionatorDetermination"
+    },
+    {
+      "featureFlagId": 84,
+      "featureFlagName": "PaymentModeDecisionatorDetermination"
+    },
+    {
+      "featureFlagId": 88,
+      "featureFlagName": "OneTouchInReviewTransactions"
+    },
+    {
+      "featureFlagId": 90,
+      "featureFlagName": "OptedIntoTexting"
+    },
+    {
+      "featureFlagId": 95,
+      "featureFlagName": "FluOutreach2022"
+    },
+    {
+      "featureFlagId": 102,
+      "featureFlagName": "PrefillPhone"
+    },
+    {
+      "featureFlagId": 103,
+      "featureFlagName": "AddAppts3.0"
+    },
+    {
+      "featureFlagId": 109,
+      "featureFlagName": "RevSpringOutreach"
+    },
+    {
+      "featureFlagId": 118,
+      "featureFlagName": "ManuallyReceiveOrders"
+    },
+    {
+      "featureFlagId": 121,
+      "featureFlagName": "RemovePayByPhone"
+    },
+    {
+      "featureFlagId": 124,
+      "featureFlagName": "EnableVxuRecCheckouts"
+    },
+    {
+      "featureFlagId": 126,
+      "featureFlagName": "EnableBaselines2.0"
+    },
+    {
+      "featureFlagId": 127,
+      "featureFlagName": "MedDAutoRun"
+    },
+    {
+      "featureFlagId": 129,
+      "featureFlagName": "LARCAvrEnabled"
+    },
+    {
+      "featureFlagId": 131,
+      "featureFlagName": "AddPatients"
+    },
+    {
+      "featureFlagId": 132,
+      "featureFlagName": "ConsentFormPdf"
+    },
+    {
+      "featureFlagId": 134,
+      "featureFlagName": "PaymentModeRetainedIfNoMeaningfulChanges"
+    },
+    {
+      "featureFlagId": 141,
+      "featureFlagName": "MobileStockSelector"
+    },
+    {
+      "featureFlagId": 143,
+      "featureFlagName": "EnabledPartnerPortalNewOrderHistory"
+    },
+    {
+      "featureFlagId": 155,
+      "featureFlagName": "EnableNewReturnManagementPage"
+    },
+    {
+      "featureFlagId": 157,
+      "featureFlagName": "ReturnSlipUseEmail"
+    },
+    {
+      "featureFlagId": 158,
+      "featureFlagName": "DeterminatorOwnsPMStock"
+    },
+    {
+      "featureFlagId": 160,
+      "featureFlagName": "EnableHubVaxCheckouts"
+    }
+  ],
+  "inventorySources": [
+    {
+      "name": "VFC",
+      "id": 2
+    },
+    {
+      "name": "State",
+      "id": 3
+    },
+    {
+      "name": "317 Public Stock",
+      "id": 4
+    }
+  ],
+  "showReturnTransactions": true,
+  "parentClinicId": 10808
+}

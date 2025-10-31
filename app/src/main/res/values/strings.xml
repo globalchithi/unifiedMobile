@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">VaxHub</string>
+    <string name="permission_must_be_accepted">Permissions must be accepted in order to use the VaxHub application.</string>
+    <string name="bridge_required_title">Missing VaxCare Bridge Application</string>
+    <string name="bridge_required_message">Please install VaxCare’s Mobile Bridge application. Contact Customer Care for questions and troubleshooting.</string>
+    <string name="install">Install</string>
+    <string name="cancel">Cancel</string>
+</resources>

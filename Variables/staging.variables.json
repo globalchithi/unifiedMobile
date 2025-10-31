@@ -1,0 +1,24 @@
+{
+  "DeploySettings": {
+    "ASSEMBLE_ENVIRONMENT": "Staging",
+    "KEY_VAULT": "github-mobile-stg",
+    "STORAGE_ACCOUNT": "vxccorpfs",
+    "SECURE_FILES_FILE_SHARE": "vaxhubplatformkeys",
+    "APK_FILE_SHARE": "vaxhubapks",
+    "VERSION_OFFSET": 108,
+    "JDK_VERSION": 17,
+    "APK_NAME": "UnifiedHub",
+    "VARIABLES_FILE_PATH": "Variables/staging.variables.json",
+    "SECRETS_FILE_PATH": "Variables/secrets.staging.variables.json",
+    "DEPLOY_VARS_FILE_PATH": "Variables/deploy.staging.variables.json"
+  },
+  "AppSettings": {
+    "DataDogUHApplicationId": "3e1e50e3-855b-4a5d-ac06-9016897dea8e",
+    "DataDogUHRumSampleRate": "100",
+    "DataDogUHSessionReplaySampleRate": "0",
+    "DataDogUHSite": "US3",
+    "OfflineCodeCorpCustomerId": "VAX112520190001",
+    "UHPlatformAlias": "platform",
+    "UHVaxVHAPIUrl": "https://vhapistg.vaxcare.com/"
+  }
+}

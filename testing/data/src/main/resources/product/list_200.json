@@ -1,0 +1,104 @@
+[
+  {
+    "ageIndications": [
+      {
+        "id": 30225,
+        "gender": "MF",
+        "minAge": 4015,
+        "maxAge": 1073741824,
+        "productId": 1,
+        "warning": null
+      }
+    ],
+    "antigen": "Hep B",
+    "routeCode": "IM",
+    "inventoryGroup": "Hep B (Adult)",
+    "categoryId": 2,
+    "cptCvxCodes": [
+      {
+        "cptCode": "90746",
+        "cvxCode": "43",
+        "isMedicare": 0,
+        "productId": 1
+      }
+    ],
+    "description": "Hepatitis B Vaccine (Adult)",
+    "id": 1,
+    "displayName": "Hep B (Recombivax HB (Adult))",
+    "statusId": 1,
+    "productNdc": "0006499541",
+    "packages": [
+      {
+        "id": 43,
+        "description": "10 x 1 SDV (1 mL) (Adult)",
+        "itemCount": 10,
+        "packageNdcs": [
+          "0006499501"
+        ],
+        "productId": 1,
+        "salesProductId": 43
+      },
+      {
+        "id": 1,
+        "description": "1 SDV (1mL) (Adult)",
+        "itemCount": 1,
+        "packageNdcs": [
+          "0006499501"
+        ],
+        "productId": 1,
+        "salesProductId": 1
+      }
+    ],
+    "presentation": "Single Dose Vial",
+    "visDates": "HEP B: 2019-08-15",
+    "lossFee": 4820,
+    "purchaseOrderFee": 4820,
+    "trackableProduct": true
+  },
+  {
+    "ageIndications": [
+      {
+        "id": 30226,
+        "gender": "MF",
+        "minAge": 1,
+        "maxAge": 7299,
+        "productId": 2,
+        "warning": null
+      }
+    ],
+    "antigen": "Hep B",
+    "routeCode": "IM",
+    "inventoryGroup": "Hep B (Ped/Adolescent)",
+    "categoryId": 2,
+    "cptCvxCodes": [
+      {
+        "cptCode": "90744",
+        "cvxCode": "8",
+        "isMedicare": 0,
+        "productId": 2
+      }
+    ],
+    "description": "Hepatitis B Vaccine (Pediatric) ",
+    "id": 2,
+    "displayName": "Hep B (Recombivax HB (Pediatric/Adolescent))",
+    "statusId": 1,
+    "productNdc": "0006498101",
+    "packages": [
+      {
+        "id": 2,
+        "description": "10 x 1 SDV (0.5 mL) (Pediatric) ",
+        "itemCount": 10,
+        "packageNdcs": [
+          "0006498101"
+        ],
+        "productId": 2,
+        "salesProductId": 2
+      }
+    ],
+    "presentation": "Single Dose Vial",
+    "visDates": "HEP B: 2019-08-15",
+    "lossFee": 2253,
+    "purchaseOrderFee": 2253,
+    "trackableProduct": true
+  }
+]
